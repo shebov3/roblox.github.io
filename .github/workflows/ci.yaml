@@ -17,11 +17,8 @@ jobs:
       uses: actions/checkout@v3
 
     - uses: ok-nick/setup-aftman@v0.4.2
-      with:
-        version: v1.0.0
-        path: some_dir/my_project
-        cache: false
-        token: ${{ secrets.GITHUB_TOKEN }}
+      name: Install aftman
+
     - name: Lint
       run: |
         selene ./src
@@ -31,9 +28,8 @@ jobs:
     name: Styling
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: JohnnyMorganz/stylua-action@1.0.0
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        args: -- check .
+    - repo: https://github.com/JohnnyMorganz/StyLua
+      rev: v0.20.0
+      hooks:
+        - id: stylua
     
