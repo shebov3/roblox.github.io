@@ -21,7 +21,7 @@ jobs:
         version: v1.0.0
         path: some_dir/my_project
         cache: false
-        token: ${{ github.token }}
+        token: ${{ secrets.GITHUB_TOKEN }}
     - name: Lint
       run: |
         selene ./src
