@@ -7,7 +7,6 @@ on:
   pull_request:
     branches:
       - main
-
 jobs:
   lint:
     name: Lint
@@ -16,9 +15,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - uses: ok-nick/setup-aftman@v0.4.2
+      - name: Setup Aftman
+        uses: ok-nick/setup-aftman@v0.4.2
         with:
-          version: v1.0.0
+          version: v0.4.2
           path: shebov3/roblox
           cache: false
           token: ${{ secrets.GITHUB_TOKEN }}
