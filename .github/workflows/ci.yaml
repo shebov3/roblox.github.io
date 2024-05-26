@@ -3,36 +3,43 @@ name: CI
 on:
   push:
     branches:
-    - main
+      - main
   pull_request:
     branches:
-    - main
+      - main
 
 jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - uses: ok-nick/setup-aftman@v0.4.2
-      with:
-        version: v1.0.0
-        path: shebov3/roblox
-        cache: false
-        token: ${{ secrets.GITHUB_TOKEN }}
-    - name: Lint
-      run: |
-        selene ./src
-    
+      - uses: ok-nick/setup-aftman@v0.4.2
+        with:
+          version: v1.0.0
+          path: shebov3/roblox
+          cache: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Lint
+        run: |
+          selene ./src
 
   style:
     name: Styling
     runs-on: ubuntu-latest
     steps:
-    - repo: https://github.com/JohnnyMorganz/StyLua
-      rev: v0.20.0
-      hooks:
-        - id: stylua
-    
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install StyLua
+        run: |
+          curl -sSL https://github.com/JohnnyMorganz/StyLua/releases/download/v0.20.0/stylua-linux.zip -o stylua.zip
+          unzip stylua.zip -d /usr/local/bin
+          rm stylua.zip
+
+      - name: Run StyLua
+        run: |
+          stylua ./src
