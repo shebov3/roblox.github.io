@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - main
+
 jobs:
   lint:
     name: Lint
@@ -15,10 +16,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Aftman
-        steps:
-        - uses: ok-nick/setup-aftman@v0.4.2
-          
+      - name: Install Aftman
+        run: |
+          curl -sSL https://github.com/LPGhatguy/aftman/releases/download/v0.5.3/aftman-linux-x86_64.zip -o aftman.zip
+          unzip aftman.zip -d aftman
+          sudo mv aftman/aftman /usr/local/bin/aftman
+          rm -rf aftman.zip aftman
+          aftman init
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Lint
         run: |
           selene ./src
