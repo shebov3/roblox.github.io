@@ -16,14 +16,12 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup Aftman
-        run: |
-          curl -sSL https://github.com/LPGhatguy/aftman/releases/download/v0.5.3/aftman-linux-x86_64.zip -o aftman.zip
-          unzip aftman.zip -d aftman
-          sudo mv aftman/aftman /usr/local/bin/aftman
-          rm -rf aftman.zip aftman
-          aftman init
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: ok-nick/setup-aftman@v0.4.2
+        with:
+          version: v0.4.2
+          path: .
+          cache: false
+          token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Lint
         run: |
