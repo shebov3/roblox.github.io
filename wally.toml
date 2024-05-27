@@ -1,0 +1,10 @@
+[package]
+name = "shebov3/roblox"
+version = "0.1.0"
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+
+[dependencies]
+promise = "evaera/promise@4.0.0"
+fusion = "elttob/fusion@0.2"
+roblox = "shebov3/roblox@0.1"
