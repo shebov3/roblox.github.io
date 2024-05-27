@@ -1,0 +1,13 @@
+{
+	"name": "Spring Test",
+	"tree": {
+
+		"$className": "DataModel",
+		"ServerScriptService": {
+			"$className": "ServerScriptService",
+			"$path": "package",
+
+			"Spring": { "$path": "lib" }
+		}
+	}
+}
