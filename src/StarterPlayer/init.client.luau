@@ -1,4 +1,3 @@
-print("Hello world, from client!")
-local x = 10
+print("Hello World!")
 
-print(x) -- nothing
+print("NICE")
