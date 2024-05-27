@@ -16,15 +16,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Aftman
-        run: |
-          curl -sSL https://github.com/LPGhatguy/aftman/releases/download/v0.5.3/aftman-linux-x86_64.zip -o aftman.zip
-          unzip aftman.zip -d aftman
-          sudo mv aftman/aftman /usr/local/bin/aftman
-          rm -rf aftman.zip aftman
-          aftman init
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      steps:
+      - uses: ok-nick/setup-aftman@v0.4.2
+        with:
+          version: v1.0.0 # name of git tag in aftman (uses latest tag by default)
+          path: . # path to project dir containing `aftman.toml` ("." (current dir) by default)
+          cache: false # whether to enable binary caching between runs (false by default)
+          token: ${{ github.token }} # GitHub token to bypass rate limit (${{ github.token }} set by default)
+
 
       - name: Lint
         run: |
