@@ -2,29 +2,26 @@
   "name": "roblox",
   "tree": {
     "$className": "DataModel",
-
     "ReplicatedStorage": {
       "$className": "ReplicatedStorage",
-      "Source": {
-        "$path": "src/ReplicatedStorage"
-      }
-    },
-    "ReplicatedFirst": {
+      "$path": "src/ReplicatedStorage",
       "Packages": {
         "$path": "Packages"
       }
     },
     "ServerScriptService": {
-      "Server": {
-        "$path": "src/ServerScriptService"
-      }
+      "$path": "src/ServerScriptService"
     },
 
     "StarterPlayer": {
+      "$className": "StarterPlayer",
+      "StarterCharacterScripts":{
+        "$className": "StarterCharacterScripts",
+        "$path": "src/StarterPlayer/StarterCharacterScripts"
+      },
       "StarterPlayerScripts": {
-        "Client": {
-          "$path": "src/StarterPlayer"
-        }
+        "$className": "StarterPlayerScripts",
+        "$path": "src/StarterPlayer/StarterPlayerScripts"
       }
     }
   }
