@@ -3,6 +3,11 @@
 registry = "test"
 
 [[package]]
+name = "7kayoh/lydie"
+version = "0.1.0"
+dependencies = [["Fusion", "elttob/fusion@0.2.0"]]
+
+[[package]]
 name = "acecateer/fusion"
 version = "0.3.1"
 dependencies = []
@@ -13,8 +18,33 @@ version = "1.10.0"
 dependencies = []
 
 [[package]]
+name = "elttob/fusion"
+version = "0.2.0"
+dependencies = []
+
+[[package]]
 name = "evaera/promise"
 version = "4.0.0"
+dependencies = []
+
+[[package]]
+name = "hexcede/fusion-utils"
+version = "0.1.2"
+dependencies = [["Fusion", "elttob/fusion@0.2.0"]]
+
+[[package]]
+name = "imavafe/neohotbar"
+version = "1.1.1"
+dependencies = [["Fusion", "elttob/fusion@0.2.0"], ["FusionUtils", "hexcede/fusion-utils@0.1.2"]]
+
+[[package]]
+name = "jakeywastaken/smartbone-2"
+version = "0.3.1"
+dependencies = []
+
+[[package]]
+name = "kroogate/maid"
+version = "0.4.3"
 dependencies = []
 
 [[package]]
@@ -28,11 +58,21 @@ version = "0.2.4"
 dependencies = [["Promise", "lukadev-0/typed-promise@4.0.2"]]
 
 [[package]]
+name = "matter-ecs/matter"
+version = "0.8.1"
+dependencies = []
+
+[[package]]
 name = "michael-48/iris"
 version = "2.2.0"
 dependencies = []
 
 [[package]]
+name = "nezuo/spark"
+version = "0.2.1"
+dependencies = [["Promise", "evaera/promise@4.0.0"]]
+
+[[package]]
 name = "shebov3/roblox"
 version = "1.0.0"
-dependencies = [["fusion", "acecateer/fusion@0.3.1"], ["iris", "michael-48/iris@2.2.0"], ["lemonSignal", "data-oriented-house/lemonsignal@1.10.0"], ["promise", "evaera/promise@4.0.0"], ["spring", "mastrickdev/spring@0.2.4"]]
+dependencies = [["fusion", "acecateer/fusion@0.3.1"], ["iris", "michael-48/iris@2.2.0"], ["lemonSignal", "data-oriented-house/lemonsignal@1.10.0"], ["lydie", "7kayoh/lydie@0.1.0"], ["maid", "kroogate/maid@0.4.3"], ["matter", "matter-ecs/matter@0.8.1"], ["neohotbar", "imavafe/neohotbar@1.1.1"], ["promise", "evaera/promise@4.0.0"], ["smartbone-2", "jakeywastaken/smartbone-2@0.3.1"], ["spark", "nezuo/spark@0.2.1"], ["spring", "mastrickdev/spring@0.2.4"]]
