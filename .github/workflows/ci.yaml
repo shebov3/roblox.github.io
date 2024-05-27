@@ -16,14 +16,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      steps:
-      - uses: ok-nick/setup-aftman@v0.4.2
-        with:
-          version: v1.0.0 # name of git tag in aftman (uses latest tag by default)
-          path: . # path to project dir containing `aftman.toml` ("." (current dir) by default)
-          cache: false # whether to enable binary caching between runs (false by default)
-          token: ${{ github.token }} # GitHub token to bypass rate limit (${{ github.token }} set by default)
-
+      - name: setup-aftman
+        uses: ok-nick/setup-aftman@v0.4.2
 
       - name: Lint
         run: |
