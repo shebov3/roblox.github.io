@@ -3,8 +3,8 @@
 registry = "test"
 
 [[package]]
-name = "elttob/fusion"
-version = "0.2.0"
+name = "acecateer/fusion"
+version = "0.3.1"
 dependencies = []
 
 [[package]]
@@ -14,5 +14,5 @@ dependencies = []
 
 [[package]]
 name = "shebov3/roblox"
-version = "0.1.0"
-dependencies = [["fusion", "elttob/fusion@0.2.0"], ["promise", "evaera/promise@4.0.0"], ["roblox", "shebov3/roblox@0.1.0"]]
+version = "1.0.0"
+dependencies = [["fusion", "acecateer/fusion@0.3.1"], ["promise", "evaera/promise@4.0.0"]]
