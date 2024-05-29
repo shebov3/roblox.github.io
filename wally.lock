@@ -80,4 +80,4 @@ dependencies = []
 [[package]]
 name = "shebov3/roblox"
 version = "1.0.0"
-dependencies = [["fusion", "acecateer/fusion@0.3.1"], ["iris", "michael-48/iris@2.2.0"], ["lemonSignal", "data-oriented-house/lemonsignal@1.10.0"], ["lydie", "7kayoh/lydie@0.1.0"], ["maid", "kroogate/maid@0.4.3"], ["matter", "matter-ecs/matter@0.8.1"], ["neohotbar", "imavafe/neohotbar@1.1.1"], ["promise", "evaera/promise@4.0.0"], ["rewire", "sayhisam1/rewire@0.3.0"], ["smartbone-2", "jakeywastaken/smartbone-2@0.3.1"], ["spark", "nezuo/spark@0.2.1"], ["spring", "mastrickdev/spring@0.2.4"]]
+dependencies = [["fusion", "acecateer/fusion@0.3.1"], ["fusion2", "elttob/fusion@0.2.0"], ["iris", "michael-48/iris@2.2.0"], ["lemonSignal", "data-oriented-house/lemonsignal@1.10.0"], ["lydie", "7kayoh/lydie@0.1.0"], ["maid", "kroogate/maid@0.4.3"], ["matter", "matter-ecs/matter@0.8.1"], ["neohotbar", "imavafe/neohotbar@1.1.1"], ["promise", "evaera/promise@4.0.0"], ["rewire", "sayhisam1/rewire@0.3.0"], ["smartbone-2", "jakeywastaken/smartbone-2@0.3.1"], ["spark", "nezuo/spark@0.2.1"], ["spring", "mastrickdev/spring@0.2.4"]]
