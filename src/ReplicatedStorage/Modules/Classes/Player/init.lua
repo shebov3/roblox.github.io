@@ -1,10 +1,7 @@
 local playerClass = {}
 playerClass.__index = playerClass
-playerClass.__tostring = function(self)
-	return `Money: {self.Money}`
-end
 
-function playerClass:new(player: Player)
+function playerClass:createController(player)
 	local controller = script.PlayerController:Clone()
 	controller.Parent = player
 
