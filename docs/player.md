@@ -9,3 +9,4 @@ local playerController = require(game.Players.LocalPlayer.PlayerController)
 ```lua
 playerController:AddMoney(100)
 ```
+SEEE

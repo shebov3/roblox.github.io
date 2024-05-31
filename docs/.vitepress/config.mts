@@ -19,11 +19,18 @@ export default defineConfig({
           { text: 'Runtime API Examples', link: '/api-examples' },
           { text: 'Player', link: '/player'}
         ]
+      },
+      {
+        text: 'Section Title B',
+        items: [
+          {}
+        ]
       }
     ],
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
     ]
-  }
+  },
+  //base: '/roblox.github.io/'
 })
