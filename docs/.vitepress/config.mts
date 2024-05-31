@@ -32,5 +32,5 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
     ]
   },
-  //base: '/roblox.github.io/'
+  base: '/roblox.github.io/'
 })
