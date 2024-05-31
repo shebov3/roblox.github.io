@@ -64,6 +64,14 @@ Fusion.New("ScreenGui")({
 	Parent = PlayerGui,
 
 	[Children] = {
+		
+	}
+})
+
+Fusion.New("ScreenGui")({
+	Parent = PlayerGui,
+
+	[Children] = {
 		Window({
 			AspectRatio = Value(1.5),
 			Visible = windowVisible,

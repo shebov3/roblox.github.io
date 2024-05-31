@@ -103,6 +103,11 @@ version = "1.0.1"
 dependencies = []
 
 [[package]]
+name = "red-blox/promise"
+version = "1.1.1"
+dependencies = [["Spawn", "red-blox/spawn@1.1.0"]]
+
+[[package]]
 name = "red-blox/ratelimit"
 version = "1.0.1"
 dependencies = []
@@ -125,4 +130,4 @@ dependencies = []
 [[package]]
 name = "shebov3/roblox"
 version = "1.0.0"
-dependencies = [["Bin", "red-blox/bin@1.0.0"], ["Clock", "red-blox/clock@1.0.0"], ["Collection", "red-blox/collection@1.0.0"], ["Fetch", "red-blox/fetch@2.0.0"], ["Future", "red-blox/future@1.0.1"], ["Guard", "red-blox/guard@1.0.1"], ["Ratelimit", "red-blox/ratelimit@1.0.1"], ["Signal", "red-blox/signal@2.0.2"], ["Spawn", "red-blox/spawn@1.1.0"], ["cmdr", "evaera/cmdr@1.12.0"], ["fusion", "acecateer/fusion@0.3.1"], ["iris", "michael-48/iris@2.2.0"], ["lemonSignal", "data-oriented-house/lemonsignal@1.10.0"], ["lydie", "7kayoh/lydie@0.1.0"], ["maid", "kroogate/maid@0.4.3"], ["neohotbar", "imavafe/neohotbar@1.1.1"], ["promise", "evaera/promise@4.0.0"], ["rewire", "sayhisam1/rewire@0.3.0"], ["smartbone-2", "jakeywastaken/smartbone-2@0.3.1"], ["spark", "nezuo/spark@0.2.1"], ["spring", "mastrickdev/spring@0.2.4"]]
+dependencies = [["Bin", "red-blox/bin@1.0.0"], ["Clock", "red-blox/clock@1.0.0"], ["Collection", "red-blox/collection@1.0.0"], ["Fetch", "red-blox/fetch@2.0.0"], ["Future", "red-blox/future@1.0.1"], ["Guard", "red-blox/guard@1.0.1"], ["Promise", "red-blox/promise@1.1.1"], ["Ratelimit", "red-blox/ratelimit@1.0.1"], ["Signal", "red-blox/signal@2.0.2"], ["Spawn", "red-blox/spawn@1.1.0"], ["cmdr", "evaera/cmdr@1.12.0"], ["fusion", "acecateer/fusion@0.3.1"], ["iris", "michael-48/iris@2.2.0"], ["lemonSignal", "data-oriented-house/lemonsignal@1.10.0"], ["lydie", "7kayoh/lydie@0.1.0"], ["maid", "kroogate/maid@0.4.3"], ["neohotbar", "imavafe/neohotbar@1.1.1"], ["promise", "evaera/promise@4.0.0"], ["rewire", "sayhisam1/rewire@0.3.0"], ["smartbone-2", "jakeywastaken/smartbone-2@0.3.1"], ["spark", "nezuo/spark@0.2.1"], ["spring", "mastrickdev/spring@0.2.4"]]

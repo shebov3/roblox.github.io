@@ -7,12 +7,12 @@ realm = "shared"
 [dependencies]
 promise = "evaera/promise@4.0.0"
 maid = "kroogate/maid@0.4.3"
+
 lemonSignal = "data-oriented-house/lemonsignal@1.10.0"
 spark = "nezuo/spark@0.2.1"
 spring = "mastrickdev/spring@0.2.4"
 rewire = "sayhisam1/rewire@0.3.0"
 smartbone-2 = "jakeywastaken/smartbone-2@0.3.1"
-cmdr = "evaera/cmdr@1.12.0"
 
 # UI
 iris = "michael-48/iris@2.2.0"
@@ -27,6 +27,7 @@ Collection = "red-blox/collection@^1.0.0"
 Fetch = "red-blox/fetch@^2.0.0"
 Future = "red-blox/future@^1.0.0"
 Guard = "red-blox/guard@^1.0.0"
+Promise = "red-blox/promise@^1.0.0"
 Ratelimit = "red-blox/ratelimit@^1.0.0"
 Signal = "red-blox/signal@^2.0.0"
 Spawn = "red-blox/spawn@^1.0.0"
