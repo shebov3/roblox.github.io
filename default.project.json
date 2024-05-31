@@ -2,29 +2,45 @@
   "name": "roblox",
   "tree": {
     "$className": "DataModel",
-
+    "$ignoreUnknownInstances": true,
+    "Workspace": {
+      "$className": "Workspace"
+    },
+    "Lighting":{
+      "$className": "Lighting"
+    },
+    "Players":{
+      "$className":"Players"
+    },
+    "ReplicatedFirst":{
+      "$className": "ReplicatedFirst"
+    },
     "ReplicatedStorage": {
       "$className": "ReplicatedStorage",
-      "Source": {
-        "$path": "src/ReplicatedStorage"
-      }
-    },
-    "ReplicatedFirst": {
+      "$ignoreUnknownInstances": true,
+      "$path": "src/ReplicatedStorage",
       "Packages": {
         "$path": "Packages"
       }
     },
     "ServerScriptService": {
-      "Server": {
-        "$path": "src/ServerScriptService"
-      }
+      "$path": "src/ServerScriptService",
+      "$ignoreUnknownInstances": true
     },
-
+    "StarterGui": {
+      "$className": "StarterGui",
+      "$ignoreUnknownInstances": true,
+      "$path": "src/StarterGui"
+    },
     "StarterPlayer": {
-      "StarterPlayerScripts": {
-        "Client": {
-          "$path": "src/StarterPlayer"
-        }
+      "$className": "StarterPlayer",
+      "StarterCharacterScripts":{
+        "$className": "StarterCharacterScripts",
+        "$path": "src/StarterPlayer/StarterCharacterScripts"
+      },
+      "StarterPlayerScripts":{
+        "$className": "StarterPlayerScripts",
+        "$path": "src/StarterPlayer/StarterPlayerScripts"
       }
     }
   }
