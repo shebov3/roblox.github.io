@@ -13,7 +13,8 @@
       "$className":"Players"
     },
     "ReplicatedFirst":{
-      "$className": "ReplicatedFirst"
+      "$className": "ReplicatedFirst",
+      "$path": "src/ReplicatedFirst"
     },
     "ReplicatedStorage": {
       "$className": "ReplicatedStorage",
