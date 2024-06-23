@@ -7,10 +7,9 @@ end
 
 local function playerJoined(player)
 	playerClass:createController(player)
-	
 	local playerController = require(player.PlayerController)
 	playerController:AddMoney(50)
-	
+
 	print(playerController) -- Money: 150, Inventory = {}, Skills = {}
 	player.CharacterAdded:Connect(characterJoined)
 end
