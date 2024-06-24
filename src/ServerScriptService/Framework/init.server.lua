@@ -1,13 +1,17 @@
 local classes = game.ReplicatedStorage.Modules.Classes
 local playerClass = require(classes.Player)
+local characterClass = require(classes.Character)
 
 local function characterJoined(character)
-	playerClass:createController(character)
+	local controller = characterClass.createController(character)
+	local characterController = require(controller)
+	characterClass.init(characterController)
 end
 
 local function playerJoined(player)
-	playerClass:createController(player)
-	local playerController = require(player.PlayerController)
+	local controller = playerClass.createController(player)
+	local playerController = require(controller)
+	playerClass.init(playerController)
 	playerController:AddMoney(50)
 
 	print(playerController) -- Money: 150, Inventory = {}, Skills = {}

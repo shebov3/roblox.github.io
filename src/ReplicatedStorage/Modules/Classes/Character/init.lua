@@ -1,14 +1,16 @@
 local characterClass = {}
 characterClass.__index = characterClass
 
-function characterClass:createController(character)
+function characterClass.createController(character)
 	local controller = script.CharacterController:Clone()
 	controller.Parent = character
+end
 
-	local CharacterController = require(controller)
-	CharacterController:inherit(self)
-
-	CharacterController.Block = false
+function characterClass.init(controller)
+	setmetatable(controller, characterClass)
+	controller.Block = false
+	controller.Attack = false
+	controller.Skills = {}
 end
 
 return characterClass

@@ -1,16 +1,17 @@
 local playerClass = {}
 playerClass.__index = playerClass
 
-function playerClass:createController(player)
+function playerClass.createController(player)
 	local controller = script.PlayerController:Clone()
 	controller.Parent = player
+	return controller
+end
 
-	local playerController = require(controller)
-	playerController:inherit(self)
-
-	playerController.Money = 100
-	playerController.Inventory = {}
-	playerController.Skills = {}
+function playerClass.init(controller)
+	setmetatable(controller, playerClass)
+	controller.Money = 100
+	controller.Inventory = {}
+	controller.Skills = {}
 end
 
 function playerClass:AddMoney(Money)
