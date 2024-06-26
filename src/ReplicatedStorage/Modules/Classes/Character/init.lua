@@ -1,16 +1,28 @@
 local characterClass = {}
+
+--[[ Metatable ]]
 characterClass.__index = characterClass
 
-function characterClass.createController(character)
-	local controller = script.CharacterController:Clone()
+--[[ Modules ]]
+local deckClass = require(game.ReplicatedStorage.Modules.Classes.Deck)
+
+--[[ Private Functions ]]
+local function createController(character: Model) : table
+	local controller: ModuleScript = script.CharacterController:Clone()
 	controller.Parent = character
+	return require(controller)
 end
 
-function characterClass.init(controller)
-	setmetatable(controller, characterClass)
-	controller.Block = false
-	controller.Attack = false
-	controller.Skills = {}
+local function init(controller)
+	controller.deck = deckClass.new()
+end
+
+--[[ Constructor ]]
+function characterClass.new(character: Model): table
+	local controller = createController(character)
+	controller = setmetatable(controller, characterClass)
+	init(controller)
+	return controller
 end
 
 return characterClass

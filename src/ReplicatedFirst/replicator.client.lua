@@ -1,0 +1,1 @@
+require(game.Players.LocalPlayer:WaitForChild("PlayerController"))

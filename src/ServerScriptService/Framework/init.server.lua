@@ -3,19 +3,19 @@ local playerClass = require(classes.Player)
 local characterClass = require(classes.Character)
 
 local function characterJoined(character)
-	local controller = characterClass.createController(character)
-	local characterController = require(controller)
-	characterClass.init(characterController)
+	local controller: table = characterClass.new(character)
+	print(controller)
 end
 
 local function playerJoined(player)
-	local controller = playerClass.createController(player)
-	local playerController = require(controller)
-	playerClass.init(playerController)
-	playerController:AddMoney(50)
-
-	print(playerController) -- Money: 150, Inventory = {}, Skills = {}
 	player.CharacterAdded:Connect(characterJoined)
+	local playerController: table = playerClass.new(player)
+
+	--[[ Testing ]]
+	task.wait(20)
+	playerController.money = 50
+	playerController.inventory = { 1, 2, "string", {} }
+	print(playerController) -- money: 150, inventory = {}
 end
 
 game.Players.PlayerAdded:Connect(playerJoined)
