@@ -19,7 +19,6 @@ local Cleanup = Fusion.cleanup
 local Children = Fusion.Children
 local Spring = Fusion.Spring
 local Computed = Fusion.Computed
-
 -- Variables
 local LocalPlayer = Players.LocalPlayer
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")

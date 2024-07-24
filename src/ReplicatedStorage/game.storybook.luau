@@ -1,5 +1,5 @@
 return {
 	storyRoots = {
-		script.Parent.UI_Components,
+		game.ReplicatedFirst.Components.UI,
 	},
 }

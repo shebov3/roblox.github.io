@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "game",
+  title: "Dominoes",
   description: "a template",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -16,14 +16,14 @@ export default defineConfig({
         text: 'Examples',
         items: [
           { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' },
-          { text: 'Player', link: '/player'}
+          { text: 'Runtime API Examples', link: '/api-examples' }
         ]
       },
       {
-        text: 'Section Title B',
+        text: 'Classes',
         items: [
-          {}
+          { text: 'Player', link: 'classes/player'},
+          { text: 'Domino', link: 'classes/domino'}
         ]
       }
     ],
