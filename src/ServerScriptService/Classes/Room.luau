@@ -34,8 +34,8 @@ end
 local function init(self)
 	local highestDouble = { value = -1 }
 	local playerCount = #self.queue
-	for i, player in pairs(self.queue) do
-		local controller = require(player:FindFirstChild("Controller")):getSelf()
+	for i, Player in pairs(self.queue) do
+		local controller = require(Player.Controller)
 		for j = 1, 7 do
 			local forceDoubleDraw = i == playerCount and j == 7 and highestDouble.value == -1
 			local domino = forceDoubleDraw and self.boneyard:drawDouble() or self.boneyard:draw()

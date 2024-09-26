@@ -5,6 +5,7 @@ registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 
 [dependencies]
+
 boattween = "boatbomber/boattween@1.0.1"
 warp = "imezx/warp@1.0.12"
 spring = "mastrickdev/spring@0.2.4"

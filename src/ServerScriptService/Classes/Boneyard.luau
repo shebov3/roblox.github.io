@@ -7,12 +7,13 @@ Boneyard.__sub = function(lhs, rhs)
 	return lhs.dominoes:remove(rhs)
 end
 
+
 --[[ Modules ]]
-local dominoHolderClass = require(script.Parent.DominoHolder)
-local dominoClass = require(script.Parent.Domino)
+local DominoHolder = require(script.Parent.DominoHolder)
+local Domino = require(script.Parent.Domino)
 
 --[[ Types ]]
-type domino = dominoClass.domino
+type domino = Domino.domino
 export type boneyard = { dominoes: { domino } }
 
 --[[ Constructor ]]
@@ -21,13 +22,13 @@ function Boneyard.new(folder): boneyard
 	local dominoes = {}
 	self.doubleKeys = {}
 	for _, domino in pairs(game.ServerStorage.Dominoes:GetChildren()) do
-		domino = dominoClass.new(domino, folder)
+		domino = Domino.new(domino, folder)
 		if domino:isDouble() then
 			table.insert(self.doubleKeys, domino.Name)
 		end
 		table.insert(dominoes, domino)
 	end
-	self.dominoes = dominoHolderClass.new(dominoes)
+	self.dominoes = DominoHolder.new(dominoes)
 	return self
 end
 

@@ -25,6 +25,8 @@ return function(props)
 	local isListening = Value(false)
 	props.Value = props.Value or Value(0)
 	props.Stepper = props.Stepper or Value(5)
+	props.Min = props.Min or Value(0)
+	props.Max = props.Max or Value(1)
 	local bar = BaseButton({
 		Position = props.Position or UDim2.fromScale(0, 0),
 		Size = UDim2.new(0, props.Width or 200, 0, 8),
@@ -38,7 +40,7 @@ return function(props)
 
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = Computed(function()
-					return UDim2.fromScale(props.Value:get(), 0.5)
+					return UDim2.fromScale(math.clamp(props.Value:get(), 0, 1), 0.5)
 				end),
 				Size = UDim2.new(3, 0, 3, 0),
 				RoundedValue = 1,
@@ -58,17 +60,22 @@ return function(props)
 
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.fromScale(0.5, 0.5),
-						Size = Tween(Computed(function()
-                            if isListening:get() then
-                                return UDim2.fromScale(0.6, 0.6)
-                            else
-                                return UDim2.fromScale(0.7, 0.7)
-                            end
-                        end), TweenInfo.new(0.3, Enum.EasingStyle.Back)),
+						Size = Tween(
+							Computed(function()
+								if isListening:get() then
+									return UDim2.fromScale(0.6, 0.6)
+								else
+									return UDim2.fromScale(0.7, 0.7)
+								end
+							end),
+							TweenInfo.new(0.3, Enum.EasingStyle.Back)
+						),
 					}),
 
 					ToolTip({
-						Text = props.Value,
+						Text = Computed(function()
+							return props.Min:get() + (props.Value:get()) * (props.Max:get() - props.Min:get())
+						end),
 						Visible = isListening,
 					}),
 				},
@@ -91,8 +98,8 @@ return function(props)
 	})
 
 	local function getClosestStep(value)
-		local step = props.Stepper:get()
-		local closest = math.floor(value / step) * step
+		local step = props.Stepper:get() / (props.Max:get() - props.Min:get())
+		local closest = math.ceil((value / step) - 0.5) * step
 		return closest / 100
 	end
 
@@ -118,7 +125,7 @@ return function(props)
 	local connection = UserInputService.InputChanged:Connect(update)
 	local connection2 = UserInputService.InputBegan:Connect(update)
 	local disconnectObserver = Observer(props.Value):onChange(function()
-		props.Value:set(getClosestStep(math.clamp(props.Value:get(), 0, 1) * 100))
+		props.Value:set(getClosestStep((math.clamp(props.Value:get(), 0, 1) * 100)))
 	end)
 
 	bar.Destroying:Connect(function()

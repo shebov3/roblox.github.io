@@ -1,5 +1,6 @@
 return {
+	name = "Game",
 	storyRoots = {
-		game.ReplicatedFirst.Components.UI,
+		game.ReplicatedFirst.UI,
 	},
 }
