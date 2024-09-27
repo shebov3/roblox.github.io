@@ -9,11 +9,10 @@ local Deck = require(ServerScriptService.Classes.Deck)
 local Domino = require(ServerScriptService.Classes.Domino)
 
 --[[ Modules ]]
-require(ServerScriptService.Modules.Rooms)
+local _Rooms = require(ServerScriptService.Modules.Rooms)
 
 --[[ Variables ]]
-local Rooms = CollectionService:GetTagged("Room")
-for _, Room in pairs(Rooms) do
+for _, Room in pairs(CollectionService:GetTagged("Room")) do
 	require(Room:FindFirstChildWhichIsA("ModuleScript"))
 end
 
