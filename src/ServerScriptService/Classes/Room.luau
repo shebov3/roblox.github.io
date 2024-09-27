@@ -1,3 +1,4 @@
+local Players = game:GetService("Players")
 local Room = {}
 Room.__index = Room
 
@@ -67,19 +68,29 @@ local function start(self)
 end
 
 --[[ Constructor ]]
-function Room.new(host: Player, Players: {Player})
+function Room.new(host: Player, PlayersCapacity: number, FriendsOnly: boolean)
 	local self: room = setmetatable({}, Room)
 	self.host = host
-	self.Players = Players
-	self.spectators = {}
+	self.PlayersCapacity = PlayersCapacity
+	self.FriendsOnly = FriendsOnly
+	self.queue = {host}
 	return self
 end
 
 function Room:Init()
+	self.spectators = {}
 	local folder = CreateFolder(self)
 	self.boneyard = boneyardClass.new(folder)
 	self.board = boardClass.new(folder)
 	start(self)
+end
+
+function Room:Join(Player: Player)
+	table.insert(self.queue, Player.Name, Player)
+end
+
+function Room:Remove(Player: Player)
+	table.remove(self.Players, Player.Name)
 end
 
 --[[ Public Functions ]]

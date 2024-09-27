@@ -7,8 +7,11 @@ local CollectionService = game:GetService("CollectionService")
 local Controller = require(ServerScriptService.Classes.Controller)
 local Deck = require(ServerScriptService.Classes.Deck)
 local Domino = require(ServerScriptService.Classes.Domino)
-local Rooms = require(ServerScriptService.Modules.Rooms)
 
+--[[ Modules ]]
+require(ServerScriptService.Modules.Rooms)
+
+--[[ Variables ]]
 local Rooms = CollectionService:GetTagged("Room")
 for _, Room in pairs(Rooms) do
 	require(Room:FindFirstChildWhichIsA("ModuleScript"))
@@ -28,7 +31,7 @@ local function playerJoined(player)
 end
 
 local function playerLeft(player)
-	local controller = require(player:FindFirstChild("Controller"))
+	local _controller = require(player:FindFirstChild("Controller"))
 end
 
 game.Players.PlayerAdded:Connect(playerJoined)
