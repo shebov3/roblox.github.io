@@ -33,8 +33,8 @@ end
 
 local function init(self)
 	local highestDouble = { value = -1 }
-	local playerCount = #self.queue
-	for i, Player in pairs(self.queue) do
+	local playerCount = #self.Players
+	for i, Player in pairs(self.Players) do
 		local controller = require(Player.Controller)
 		for j = 1, 7 do
 			local forceDoubleDraw = i == playerCount and j == 7 and highestDouble.value == -1
@@ -54,7 +54,7 @@ end
 local function gameLoop(self)
 	spawn(function()
 		while true do
-			local player = self.queue[self.turn]
+			local player = self.Players[self.turn]
 			task.wait(10)
 			self:nextTurn()
 		end
@@ -67,22 +67,25 @@ local function start(self)
 end
 
 --[[ Constructor ]]
-function Room.new(players: { Player }, host: Player)
+function Room.new(host: Player, Players: {Player})
 	local self: room = setmetatable({}, Room)
 	self.host = host
-	self.queue = players
+	self.Players = Players
 	self.spectators = {}
+	return self
+end
+
+function Room:Init()
 	local folder = CreateFolder(self)
 	self.boneyard = boneyardClass.new(folder)
 	self.board = boardClass.new(folder)
 	start(self)
-	return self
 end
 
 --[[ Public Functions ]]
 function Room:nextTurn()
 	self.turn += 1
-	self.turn %= #self.queue + 1
+	self.turn %= #self.Players + 1
 end
 
 function Room:specatate(player)

@@ -13,6 +13,7 @@ function Controller.new(Host: Player | Model): table
 	local self: table = CreateController(Host)
 	setmetatable(self, Controller)
 	self.Host = Host
+	self.InRoom = false
 	return self
 end
 

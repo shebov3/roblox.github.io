@@ -1,9 +1,7 @@
 local Room = {}
 Room.__index = Room
 
-local CollectionService = game:GetService("CollectionService")
 local Players = game:GetService("Players")
-local Warp = require(game.ReplicatedStorage.Packages.warp)
 
 local function UpdateUI(self)
 	self.Model.Main.SurfaceGui.Frame.Players.Text = `{self.Count}/{self.Capacity}`

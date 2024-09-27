@@ -29,7 +29,12 @@ return function(props: table)
 	props.Visible = props.Visible or Fusion.Value(false)
 	props.Events = props.Events or {}
 	local visible = Fusion.Value(true)
-
+	local sliderValue = Fusion.Value(4)
+	local PlayersCapacity = 4
+	local stateValue = false
+	Fusion.Observer(sliderValue):onChange(function()
+		PlayersCapacity = (sliderValue:get()*2)+2
+	end)
 	props.Frames = {
 		Frame({
 			Padding = UDim.new(0, 10),
@@ -42,7 +47,7 @@ return function(props: table)
 						TextLabel({ Text = "Room Capacity: ", AnchorPoint = Vector2.new(0.5, 0.5) }),
 						Slider({
 							Width = 200,
-							Value = Fusion.Value(4),
+							Value = sliderValue,
 							Stepper = Fusion.Value(100),
 							Min = Fusion.Value(2),
 							Max = Fusion.Value(4),
@@ -53,7 +58,13 @@ return function(props: table)
 					Padding = UDim.new(0, 150),
 					Children = {
 						TextLabel({ Text = "Friends Only: ", AnchorPoint = Vector2.new(0.5, 0.5) }),
-						Toggle({}),
+						Toggle({
+							OnClick = function(state)
+								stateValue = not state:get()
+								state:set(stateValue)
+								
+							end,
+						}),
 					},
 				}),
 				Container({
@@ -61,7 +72,7 @@ return function(props: table)
 						Button({
 							Text = "Create",
 							OnClick = function()
-								event:Fire()
+								event:Fire(true, PlayersCapacity, stateValue)
 							end,
 						}),
 					},

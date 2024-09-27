@@ -7,6 +7,7 @@ local CollectionService = game:GetService("CollectionService")
 local Controller = require(ServerScriptService.Classes.Controller)
 local Deck = require(ServerScriptService.Classes.Deck)
 local Domino = require(ServerScriptService.Classes.Domino)
+local Rooms = require(ServerScriptService.Modules.Rooms)
 
 local Rooms = CollectionService:GetTagged("Room")
 for _, Room in pairs(Rooms) do
@@ -17,7 +18,7 @@ local function playerJoined(player)
 	local playerController = Controller.new(player)
 	playerController.Coins = 100
 	playerController.InRoom = false
-	
+
 	local folder = Instance.new("Folder")
 	folder.Name = player.Name
 	folder.Parent = workspace
