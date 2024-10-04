@@ -1,0 +1,6 @@
+{
+  "name": "tailwind",
+  "tree": {
+    "$path": "dist"
+  }
+}

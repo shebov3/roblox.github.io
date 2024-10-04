@@ -1,6 +1,6 @@
 return {
 	name = "Game",
 	storyRoots = {
-		game.ReplicatedFirst.UI,
+		game.ReplicatedFirst.UI.Stories,
 	},
 }

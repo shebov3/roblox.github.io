@@ -1,4 +1,3 @@
-local Players = game:GetService("Players")
 local Room = {}
 Room.__index = Room
 
@@ -14,6 +13,16 @@ local Boneyard = require(script.Parent.Boneyard)
 type domino = dominoClass.domino
 type board = Board.board
 type boneyard = Boneyard.boneyard
+
+export type Room = {
+	Host: Player,
+	PlayerCapacity: number,
+	FriendsOnly: boolean,
+	Queue: { Player },
+	Spectators: { Player },
+	boardyard: boneyard,
+	board: board,
+}
 
 --[[ Private Functions ]]
 local function CreateFolder(self)
@@ -46,7 +55,7 @@ end
 local function gameLoop(self)
 	Spawn(function()
 		while true do
-			local player = self.Queue[self.turn]
+			local Player = self.Queue[self.turn]
 			task.wait(10)
 			self:nextTurn()
 		end
@@ -64,10 +73,11 @@ function Room.new(host: Player, PlayersCapacity: number, FriendsOnly: boolean)
 	self.Host = host
 	self.PlayersCapacity = PlayersCapacity
 	self.FriendsOnly = FriendsOnly
-	self.Queue = {host}
+	self.Queue = { host }
 	return self
 end
 
+--[[ Public Functions ]]
 function Room:Init()
 	self.Spectators = {}
 	local folder = CreateFolder(self)
@@ -84,7 +94,14 @@ function Room:Remove(Player: Player)
 	table.remove(self.Queue, Player.Name)
 end
 
---[[ Public Functions ]]
+function Room:Delete()
+	for _, Player in pairs(self.Queue) do
+		local Controller = require(Player:FindFirstChild("Controller"))
+		Controller.InRoom = nil
+	end
+	self = nil
+end
+
 function Room:NextTurn()
 	self.turn += 1
 	self.turn %= #self.Queue + 1
