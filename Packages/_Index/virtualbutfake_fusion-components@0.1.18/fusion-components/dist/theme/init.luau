@@ -12,7 +12,7 @@ export type optionalColorTable = themeFramework.optionalColorTable
 export type useColorFunction = themeFramework.useColorFunction
 
 local globals = {
-	font = Value(Font.fromEnum(Enum.Font.SourceSans)),
+	font = Value(Font.fromEnum(Enum.Font.GothamMedium)),
 	isDark = Value(false),
 	background = Value(Color3.fromRGB(255, 255, 255)),
 }

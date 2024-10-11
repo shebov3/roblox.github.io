@@ -30,7 +30,6 @@ local function text(props: props)
 	if props.TweenSettings == nil then
 		props.TweenSettings = TweenInfo.new(0.2, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
 	end
-
 	local convertedText = type(props.Text) == "table" and peek(props.Text) == props.Text and props.Text :: text
 		or {
 			Label = Computed(function()
@@ -39,10 +38,9 @@ local function text(props: props)
 			Font = use(theme.global.font),
 			TextSize = 14,
 		} :: text
-
 	local component = New("TextLabel")({
 		BackgroundTransparency = 1,
-		FontFace = convertedText.Font,
+		Font = convertedText.Font,
 		Text = convertedText.Label,
 		TextColor3 = Tween(
 			Computed(function()

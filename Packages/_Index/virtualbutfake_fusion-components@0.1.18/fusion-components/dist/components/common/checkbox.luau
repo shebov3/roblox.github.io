@@ -53,6 +53,7 @@ local function checkbox(props: props): TextButton
 	local useColor = theme:get("checkbox", props.Color, "default", currentVisualState, props.AppearanceOverride)
 
 	local component = baseButton({
+		AnchorPoint = props.AnchorPoint or Vector2.new(.5,.5),
 		Name = "CheckboxContainer",
 		Appearance = useColor("Background", true),
 		Stroke = useColor("Stroke", true),
