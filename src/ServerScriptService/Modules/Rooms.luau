@@ -24,8 +24,8 @@ local LeaveRoomEvent = Warp.Server("LeaveRoom")
 local StartRoomEvent = Warp.Server("StartRoom")
 
 --[[ Functions ]]
-function Rooms:CreateRoom(Player, PlayersCapacity, FriendsOnly)
-	local HostRoom = Room.new(Player, PlayersCapacity, FriendsOnly)
+function Rooms:CreateRoom(Player, RoomCapacity, FriendsOnly)
+	local HostRoom = Room.new(Player, RoomCapacity, FriendsOnly)
 	table.insert(self, Player.Name, Room)
 	return HostRoom
 end
@@ -35,13 +35,14 @@ function Rooms:DeleteRoom(Player, HostRoom)
 end
 
 --[[ Events ]]
-CreateRoomEvent:Connect(function(Player: Player, PlayersCapacity: number, FriendsOnly: boolean)
+CreateRoomEvent:Connect(function(Player: Player, RoomCapacity: number, FriendsOnly: boolean)
 	local Controller = require(Player:FindFirstChild("Controller"))
 	if not Controller.InRoom then
 		return
 	end
-	local HostRoom = Rooms:CreateRoom(Player, PlayersCapacity, FriendsOnly)
+	local HostRoom = Rooms:CreateRoom(Player, RoomCapacity, FriendsOnly)
 	Controller.InRoom = HostRoom
+	CreateRoomEvent:Fire(true, Player)
 end)
 
 StartRoomEvent:Connect(function(Player: Player)
@@ -49,7 +50,6 @@ StartRoomEvent:Connect(function(Player: Player)
 	if not HostRoom then
 		return
 	end
-
 end)
 
 DeleteRoomEvent:Connect(function(Player: Player)

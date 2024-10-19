@@ -19,7 +19,7 @@ end
 local function playerJoined(player)
 	local playerController = Controller.new(player)
 	playerController.Coins = 100
-	playerController.InRoom = false
+	playerController.InRoom = nil
 
 	local folder = Instance.new("Folder")
 	folder.Name = player.Name

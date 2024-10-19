@@ -1,14 +1,28 @@
 local Packages = game.ReplicatedStorage.Packages
 local Fusion = require(Packages.Fusion)
 local Window = require(game.ReplicatedFirst.UI.Components.Window)
+local RunSerivce = game:GetService("RunService")
+
+local CreateRoomEvent = {}
+if RunSerivce:IsStudio() then
+	function CreateRoomEvent:Fire()
+		print("none")
+	end
+else
+	local Warp = require(Packages.warp)
+	CreateRoomEvent = Warp.Client("CreateRoom")
+end
 
 local New = Fusion.New
 local Children = Fusion.Children
 local Components = require(Packages.fusionComponents)
 local Button = Components.common.button
+local Frame = Components.base.frame
 local Slider = Components.common.slider
 local InputMenu = Components.common.inputMenu
 local CheckBox = Components.common.checkbox
+
+local VerticalPaddingValue = Fusion.Value(UDim.new(0.1, 0))
 
 local HorizontalPadding = function()
 	return New("UIListLayout")({
@@ -22,7 +36,7 @@ end
 
 local VerticalPadding = function()
 	return New("UIListLayout")({
-		Padding = UDim.new(0.1, 0),
+		Padding = Fusion.Tween(VerticalPaddingValue, TweenInfo.new(0.4, Enum.EasingStyle.Quad)),
 		FillDirection = Enum.FillDirection.Vertical,
 		HorizontalAlignment = Enum.HorizontalAlignment.Center,
 		VerticalAlignment = Enum.VerticalAlignment.Center,
@@ -40,80 +54,153 @@ local TextLabel = function(Text)
 		Size = UDim2.fromScale(0.3, 1),
 	})
 end
-
+local FriendsOnly = Fusion.Value(false)
+local AdvancedOptions = Fusion.Value(false)
+local RoomCapacity = Fusion.Value(3)
 
 return function(props)
 	props = props or {}
-	local FriendsOnly = Fusion.Value(false)
 	props.Content = {
 		New("Frame")({
 			Name = "CreateRoom",
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
 			[Children] = {
-				VerticalPadding(),
 				New("Frame")({
 					BackgroundTransparency = 1,
-					Size = UDim2.fromScale(1, 0.06),
+					Size = UDim2.new(1, 0, 1, 0),
 					[Children] = {
-						HorizontalPadding(),
-						TextLabel("Room Capacity:"),
+						VerticalPadding(),
 						New("Frame")({
 							BackgroundTransparency = 1,
-							Size = UDim2.new(.3, 0, .5, 0),
+							Size = UDim2.fromScale(1, 0.06),
 							[Children] = {
-								Slider({
-									Color = "red",
-									Min = 2,
-									Max = 4,
-									Tooltip = true,
-									Value = 3,
-									Step = 1,
-									Width = UDim.new(1, 0),
-								}),
-							},
-						}),
-					},
-				}),
-				New("Frame")({
-					BackgroundTransparency = 1,
-					Size = UDim2.fromScale(1, 0.06),
-					[Children] = {
-						HorizontalPadding(),
-						TextLabel("Friends Only:"),
-						New("Frame")({
-							BackgroundTransparency = 1,
-							Size = UDim2.new(0.3, 0, 1, 0),
-							[Children] = {
+								HorizontalPadding(),
+								TextLabel("Room Capacity:"),
 								New("Frame")({
-									BackgroundTransparency = 0.5,
-									Size = UDim2.fromScale(0, 0),
-									Position = UDim2.fromScale(0.5, 0.5),
-									AnchorPoint = Vector2.new(0.5, 0.5),
+									BackgroundTransparency = 1,
+									Size = UDim2.new(0.3, 0, 0.5, 0),
 									[Children] = {
-										CheckBox({
+										Slider({
 											Color = "red",
-											State = FriendsOnly,
-											OnClick = function()
-												FriendsOnly:set(not FriendsOnly:get())
-											end,
+											Min = 2,
+											Max = 4,
+											Tooltip = true,
+											Value = RoomCapacity,
+											Step = 1,
+											Width = UDim.new(1, 0),
 										}),
 									},
 								}),
 							},
 						}),
+						New("Frame")({
+							BackgroundTransparency = 1,
+							Size = UDim2.fromScale(1, 0.06),
+							[Children] = {
+								HorizontalPadding(),
+								TextLabel("Friends Only:"),
+								New("Frame")({
+									BackgroundTransparency = 1,
+									Size = UDim2.new(0.3, 0, 1, 0),
+									[Children] = {
+										New("Frame")({
+											BackgroundTransparency = 0.5,
+											Size = UDim2.fromScale(0, 0),
+											Position = UDim2.fromScale(0.5, 0.5),
+											AnchorPoint = Vector2.new(0.5, 0.5),
+											[Children] = {
+												CheckBox({
+													Color = "red",
+													State = FriendsOnly,
+													OnClick = function()
+														FriendsOnly:set(not FriendsOnly:get())
+													end,
+												}),
+											},
+										}),
+									},
+								}),
+							},
+						}),
+						--! Advanced Options
+						--#region
+						-- New("Frame")({
+						-- 	BackgroundTransparency = 1,
+						-- 	Size = Fusion.Tween(
+						-- 		Fusion.Computed(function()
+						-- 			return if AdvancedOptions:get() then UDim2.fromScale(0.9, 0.6) else UDim2.fromScale(.25, 0.05)
+						-- 		end),
+						-- 		TweenInfo.new(0.5, Enum.EasingStyle.Quad)
+						-- 	),
+						-- 	[Children] = {
+						-- 		Button({
+						-- 			Color = "black",
+						-- 			Variant = "solid",
+						-- 			Icon = { Name = "settings", Size = 16 },
+						-- 			ButtonText = {
+						-- 				Label = "Advanced Options",
+						-- 				TextSize = 16,
+						-- 				FontStyle = Enum.Font.GothamMedium,
+						-- 			},
+						-- 			AutomaticSize = Enum.AutomaticSize.XY,
+						-- 			OnClick = function()
+						-- 				AdvancedOptions:set(not AdvancedOptions:get())
+						-- 				if AdvancedOptions:get() then
+						-- 					VerticalPaddingValue:set(UDim.new(.05, 0))
+						-- 				else
+						-- 					VerticalPaddingValue:set(UDim.new(.1, 0))
+						-- 				end
+						-- 			end,
+						-- 			ZIndex = 2,
+						-- 		}),
+						-- 		Frame({
+						-- 			Visible = true,
+						-- 			CornerRadius = 8,
+						-- 			BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+						-- 			BackgroundTransparency = Fusion.Tween(
+						-- 				Fusion.Computed(function()
+						-- 					return if AdvancedOptions:get() then 0 else 1
+						-- 				end),
+						-- 				TweenInfo.new(0.5, Enum.EasingStyle.Quad)
+						-- 			),
+						-- 			Size = UDim2.fromScale(1, 1),
+						-- 			[Children] = {},
+						-- 		}),
+						-- 	},
+						-- }),
+						--#endregion
+						Button({
+							Color = "red",
+							Variant = "solid",
+							ButtonText = { Label = "Create Room", TextSize = 20, FontStyle = Enum.Font.GothamMedium },
+							AutomaticSize = Enum.AutomaticSize.XY,
+							OnClick = function()
+								CreateRoomEvent:Fire(true, RoomCapacity, FriendsOnly)
+							end,
+						}),
 					},
 				}),
-				Button({
-					Color = "red",
-					Variant = "solid",
-					ButtonText = { Label = "Create Room", TextSize = 20, Font = Enum.Font.GothamMedium },
-
-					AutomaticSize = Enum.AutomaticSize.XY,
-				}),
+				New("Frame")({
+					BackgroundTransparency = 1,
+					Size = UDim2.fromScale(1,1),
+				})
 			},
 		}),
+		New("Frame")({
+			Name = "SearchRoom",
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1, 0, 1, 0),
+			[Children] = New("Frame")({
+				BackgroundTransparency = 1,
+				Size = UDim2.new(1, 0, 1, 0),
+				[Children] = {
+					
+				},
+			}),
+		}),
 	}
+
 	props.Apps = {
 		Button({
 			Name = "CreateRoom",

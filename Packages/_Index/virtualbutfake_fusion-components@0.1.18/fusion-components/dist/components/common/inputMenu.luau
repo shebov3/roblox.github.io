@@ -342,6 +342,7 @@ local function inputMenu(props: props): Frame
 			},
 		})
 	end)
+
 	return Hydrate(component)(propertyProvider.getPropsAndSpecialKeys(props, "Frame"))
 end
 
