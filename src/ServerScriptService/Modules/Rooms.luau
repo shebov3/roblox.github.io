@@ -11,6 +11,7 @@ local Classes = game.ServerScriptService.Classes
 local Warp = require(Packages.warp)
 local Room = require(Classes.Room)
 
+
 --[[ Types ]]
 type Room = Room.Room
 
@@ -26,18 +27,20 @@ local StartRoomEvent = Warp.Server("StartRoom")
 --[[ Functions ]]
 function Rooms:CreateRoom(Player, RoomCapacity, FriendsOnly)
 	local HostRoom = Room.new(Player, RoomCapacity, FriendsOnly)
-	table.insert(self, Player.Name, Room)
+	self[Player] = Room
 	return HostRoom
 end
 
 function Rooms:DeleteRoom(Player, HostRoom)
+	self[Player] = nil
 	table.remove(HostRoom, Player.Name)
 end
 
 --[[ Events ]]
 CreateRoomEvent:Connect(function(Player: Player, RoomCapacity: number, FriendsOnly: boolean)
 	local Controller = require(Player:FindFirstChild("Controller"))
-	if not Controller.InRoom then
+	if Controller.InRoom then
+		CreateRoomEvent:Fire(true, Player, false)
 		return
 	end
 	local HostRoom = Rooms:CreateRoom(Player, RoomCapacity, FriendsOnly)

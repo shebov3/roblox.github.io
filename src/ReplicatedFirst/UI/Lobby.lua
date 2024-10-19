@@ -3,21 +3,33 @@ local Fusion = require(Packages.Fusion)
 local Window = require(game.ReplicatedFirst.UI.Components.Window)
 local RunSerivce = game:GetService("RunService")
 
-local CreateRoomEvent = {}
-if RunSerivce:IsStudio() then
-	function CreateRoomEvent:Fire()
-		print("none")
-	end
-else
+--[[ Variables ]]
+local FriendsOnly = Fusion.Value(false)
+local AdvancedOptions = Fusion.Value(false)
+local RoomCapacity = Fusion.Value(3)
+local RoomWindow = Fusion.Value(true)
+
+local CreateRoomEvent = setmetatable({}, {
+	__index = function()
+		return function() end
+	end,
+})
+
+if RunSerivce:IsRunning() then
 	local Warp = require(Packages.warp)
 	CreateRoomEvent = Warp.Client("CreateRoom")
 end
+
+CreateRoomEvent:Connect(function()
+	RoomWindow:set(true)
+end)
 
 local New = Fusion.New
 local Children = Fusion.Children
 local Components = require(Packages.fusionComponents)
 local Button = Components.common.button
 local Frame = Components.base.frame
+local Badge = Components.common.badge
 local Slider = Components.common.slider
 local InputMenu = Components.common.inputMenu
 local CheckBox = Components.common.checkbox
@@ -54,21 +66,20 @@ local TextLabel = function(Text)
 		Size = UDim2.fromScale(0.3, 1),
 	})
 end
-local FriendsOnly = Fusion.Value(false)
-local AdvancedOptions = Fusion.Value(false)
-local RoomCapacity = Fusion.Value(3)
 
 return function(props)
 	props = props or {}
 	props.Content = {
 		New("Frame")({
-			Name = "CreateRoom",
+			Name = "Room",
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
 			[Children] = {
 				New("Frame")({
+					Name = "Create",
+					Visible = Fusion.Computed(function() return not RoomWindow:get() end),
 					BackgroundTransparency = 1,
-					Size = UDim2.new(1, 0, 1, 0),
+					Size = UDim2.fromScale(1, 1),
 					[Children] = {
 						VerticalPadding(),
 						New("Frame")({
@@ -123,8 +134,7 @@ return function(props)
 								}),
 							},
 						}),
-						--! Advanced Options
-						--#region
+						--#region Advanced Options
 						-- New("Frame")({
 						-- 	BackgroundTransparency = 1,
 						-- 	Size = Fusion.Tween(
@@ -173,8 +183,13 @@ return function(props)
 						Button({
 							Color = "red",
 							Variant = "solid",
-							ButtonText = { Label = "Create Room", TextSize = 20, FontStyle = Enum.Font.GothamMedium },
+							ButtonText = {
+								Label = "Create Room",
+								TextSize = 20,
+								FontStyle = Enum.Font.GothamMedium,
+							},
 							AutomaticSize = Enum.AutomaticSize.XY,
+							LayoutOrder = 0,
 							OnClick = function()
 								CreateRoomEvent:Fire(true, RoomCapacity, FriendsOnly)
 							end,
@@ -182,9 +197,34 @@ return function(props)
 					},
 				}),
 				New("Frame")({
+					Visible = RoomWindow,
 					BackgroundTransparency = 1,
-					Size = UDim2.fromScale(1,1),
-				})
+					Size = UDim2.fromScale(1, 1),
+					[Children] = {
+						VerticalPadding(),
+						New("Frame")({
+							BackgroundTransparency = 0,
+							Size = UDim2.fromScale(1, .4),
+							[Children] = {
+								
+							},
+						}),
+						Button({
+							Color = "red",
+							Variant = "solid",
+							ButtonText = {
+								Label = "Start Room",
+								TextSize = 20,
+								FontStyle = Enum.Font.GothamMedium,
+							},
+							AutomaticSize = Enum.AutomaticSize.XY,
+							LayoutOrder = 0,
+							OnClick = function()
+								CreateRoomEvent:Fire(true, RoomCapacity, FriendsOnly)
+							end,
+						}),
+					},
+				}),
 			},
 		}),
 		New("Frame")({
@@ -194,16 +234,14 @@ return function(props)
 			[Children] = New("Frame")({
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 1, 0),
-				[Children] = {
-					
-				},
+				[Children] = {},
 			}),
 		}),
 	}
 
 	props.Apps = {
 		Button({
-			Name = "CreateRoom",
+			Name = "Room",
 			Color = "black",
 			Variant = "solid",
 			AnchorPoint = Vector2.new(1, 0.5),
