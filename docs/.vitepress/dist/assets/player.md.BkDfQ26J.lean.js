@@ -1,1 +1,0 @@
-import{_ as a,c as s,o as i,a1 as e}from"./chunks/framework.DX7ET8ar.js";const g=JSON.parse('{"title":"Player","description":"","frontmatter":{},"headers":[],"relativePath":"player.md","filePath":"player.md"}'),l={name:"player.md"},t=e("",5),n=[t];function r(h,p,o,k,d,c){return i(),s("div",null,n)}const E=a(l,[["render",r]]);export{g as __pageData,E as default};
